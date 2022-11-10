@@ -24,8 +24,8 @@ public class MyLinkedListRunner {
 	}
 
 	public static void test00constructorToString() {
-		MyLinkedList a = new MyLinkedList();
-		MyLinkedList b = new MyLinkedList(20);
+		MyLinkedList<Integer> a = new MyLinkedList<Integer>();
+		MyLinkedList<Integer> b = new MyLinkedList<Integer>(20);
 
 		if ((a.size() == 0 && a.toString().equals("[]")) &&
 				(b.size() == 1 && b.toString().equals("[20]"))) {
@@ -35,7 +35,7 @@ public class MyLinkedListRunner {
 	}
 
 	public static void test01singleParamAdd() {
-		MyLinkedList list = new MyLinkedList();
+		MyLinkedList<Integer> list = new MyLinkedList<Integer>();
 		list.add(4);
 		list.add(5);
 		list.add(6);
@@ -47,7 +47,7 @@ public class MyLinkedListRunner {
 	}
 
 	public static void test02contains() {
-		MyLinkedList list = new MyLinkedList();
+		MyLinkedList<Integer> list = new MyLinkedList<Integer>();
 		list.add(4);
 		list.add(5);
 		list.add(6);
@@ -60,7 +60,7 @@ public class MyLinkedListRunner {
 	}
 
 	public static void test03indexOf() {
-		MyLinkedList list = new MyLinkedList();
+		MyLinkedList<Integer> list = new MyLinkedList<Integer>();
 		list.add(4);
 		list.add(5);
 		list.add(6);
@@ -73,7 +73,7 @@ public class MyLinkedListRunner {
 	}
 
 	public static void test04get() {
-		MyLinkedList list = new MyLinkedList();
+		MyLinkedList<Integer> list = new MyLinkedList<Integer>();
 		list.add(4);
 		list.add(5);
 		list.add(10);
@@ -86,7 +86,7 @@ public class MyLinkedListRunner {
 	}
 
 	public static void test05set() {
-		MyLinkedList list = new MyLinkedList();
+		MyLinkedList<Integer> list = new MyLinkedList<Integer>();
 		list.add(4);
 		list.add(5);
 		list.add(6);
@@ -103,7 +103,7 @@ public class MyLinkedListRunner {
 	}
 
 	public static void test06removeBasic() {
-		MyLinkedList list = new MyLinkedList();
+		MyLinkedList<Integer> list = new MyLinkedList<Integer>();
 		list.add(4);
 		list.add(5);
 		list.add(6);
@@ -121,7 +121,7 @@ public class MyLinkedListRunner {
 	}
 
 	public static void test07twoParamAdd() {
-		MyLinkedList list = new MyLinkedList();
+		MyLinkedList<Integer> list = new MyLinkedList<Integer>();
 		list.add(4);
 		list.add(5);
 		list.add(6);
@@ -139,7 +139,7 @@ public class MyLinkedListRunner {
 	}
 
 	public static void test08removeAll() {
-		MyLinkedList list = new MyLinkedList();
+		MyLinkedList<Integer> list = new MyLinkedList<Integer>();
 		list.add(4);
 		list.add(5);
 		list.add(6);
@@ -157,7 +157,7 @@ public class MyLinkedListRunner {
 	/** test ability to add at index 0 when size = 0 */
 	@SuppressWarnings("unused")
 	private static void testTwoParamAddWithEmptyList() { // edge case not tested in original tests
-		MyLinkedList list = new MyLinkedList();
+		MyLinkedList<Integer> list = new MyLinkedList<Integer>();
 		list.add(2, 0);
 		System.out.println(list);
 		System.out.println(list.size());

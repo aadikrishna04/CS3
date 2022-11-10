@@ -1,11 +1,11 @@
 package U03_LinkedLists_07_MyLinkedList;
 
-public class MyLinkedList {
-    public static class ListNode {
-        public int val;
+public class MyLinkedList<T> {
+    public class ListNode {
+        public T val;
         public ListNode next;
 
-        public ListNode(int val) {
+        public ListNode(T val) {
             this.val = val;
             this.next = null;
         }
@@ -20,12 +20,20 @@ public class MyLinkedList {
         this.size = 0;
     }
 
-    public MyLinkedList(int val) {
+    public MyLinkedList(T val) {
         this.head = new ListNode(val);
         this.size = 1;
     }
 
-    public void add(int newVal) {
+    @SuppressWarnings("unchecked")
+    public MyLinkedList(T... vals) {
+        this();
+        for (T t : vals) {
+            add(t);
+        }
+    }
+
+    public void add(T newVal) {
         if (size == 0) {
             head = new ListNode(newVal);
             size++;
@@ -39,7 +47,7 @@ public class MyLinkedList {
         }
     }
 
-    public boolean contains(int target) {
+    public boolean contains(T target) {
         ListNode curr = head;
         int count = 0;
         while (count < size) {
@@ -53,7 +61,7 @@ public class MyLinkedList {
         return false;
     }
 
-    public int indexOf(int target) {
+    public int indexOf(T target) {
         ListNode curr = head;
         int count = 0;
         while (curr != null) {
@@ -67,7 +75,7 @@ public class MyLinkedList {
         return -1;
     }
 
-    public int get(int index) {
+    public T get(int index) {
         if (index >= size || index < 0) {
             throw new IndexOutOfBoundsException();
         } else {
@@ -83,10 +91,10 @@ public class MyLinkedList {
                 curr = curr.next;
             }
         }
-        return -1;
+        throw new IndexOutOfBoundsException();
     }
 
-    public void set(int newVal, int index) {
+    public void set(T newVal, int index) {
         ListNode curr = head;
         int count = 0;
 
@@ -110,7 +118,7 @@ public class MyLinkedList {
         return size;
     }
 
-    public int remove(int index) {
+    public T remove(int index) {
         if (size == 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
@@ -118,7 +126,7 @@ public class MyLinkedList {
         ListNode last = null;
 
         if (index == 0) {
-            int val = head.val;
+            T val = head.val;
             head = head.next;
             size--;
             return val;
@@ -130,7 +138,7 @@ public class MyLinkedList {
             count++;
         }
 
-        int val = curr.val;
+        T val = curr.val;
 
         if (tail == curr) {
             tail = last;
@@ -141,28 +149,28 @@ public class MyLinkedList {
         return val;
     }
 
-    public void add(int newVal, int index) {
-        if (index > size)
+    public void add(T newVal, int index) {
+        if (index > size || index < 0) {
             throw new IndexOutOfBoundsException();
+        }
+
         if (index == size) {
             add(newVal);
-            return;
+        } else if (index == 0) {
+            ListNode curr = head;
+            head = new ListNode(newVal);
+            head.next = curr;
+            size++;
+        } else {
+            ListNode curr = head;
+            for (int i = 0; i < index - 1; i++) {
+                curr = curr.next;
+            }
+            ListNode node = curr.next;
+            curr.next = new ListNode(newVal);
+            curr.next.next = node;
+            size++;
         }
-        ListNode node = head, prev = null;
-        if (index == 0) {
-            ListNode n = new ListNode(newVal);
-            n.next = head;
-            head = n;
-            return;
-        }
-        for (int i = 0; i < index; i++) {
-            prev = node;
-            node = node.next;
-        }
-        ListNode n = new ListNode(newVal);
-        n.next = node;
-        prev.next = n;
-        size++;
     }
 
     @Override
