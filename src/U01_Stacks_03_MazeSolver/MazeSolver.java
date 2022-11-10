@@ -54,19 +54,17 @@ public abstract class MazeSolver {
         if (isEmpty()) {
             return "Maze is unsolvable.";
         } else if (isSolved()) {
-            Square current = this.maze.getEnd();
-            String result = "[" + current.getRow() + ", " + current.getCol() + "]";
-            current.setStatus(Square.ON_EXIT_PATH);
+            Square curr = this.maze.getEnd();
+            String path = "[" + curr.getRow() + ", " + curr.getCol() + "]";
+            curr.setStatus(Square.ON_EXIT_PATH);
 
-            while (current.getPrevious() != null) {
-                current = current.getPrevious();
-                result += ", [" + current.getRow() + ", " + current.getCol() + "]";
-                current.setStatus(Square.ON_EXIT_PATH);
+            while (curr.getPrevious() != null) {
+                curr = curr.getPrevious();
+                path += ", [" + curr.getRow() + ", " + curr.getCol() + "]";
+                System.out.println(path);
+                curr.setStatus(Square.ON_EXIT_PATH);
             }
-
-            return result;
-        } else if (isSolved()) {
-            return "Maze is solved.";
+            return path;
         } else {
             return "Maze not yet solved.";
         }
