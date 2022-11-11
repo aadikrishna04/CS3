@@ -1,22 +1,22 @@
 package U01_Stacks_03_MazeSolver;
 
-abstract class MazeSolver {
+public abstract class MazeSolver {
     private Maze maze;
     private boolean isSolved;
 
-    MazeSolver(Maze maze) {
+    public MazeSolver(Maze maze) {
         this.maze = maze;
         makeEmpty();
         add(maze.getStart());
     }
 
-    abstract void makeEmpty();
+    public abstract void makeEmpty();
 
-    abstract boolean isEmpty();
+    public abstract boolean isEmpty();
 
-    abstract void add(Square s);
+    public abstract void add(Square s);
 
-    abstract Square next();
+    public abstract Square next();
 
     public boolean isSolved() {
         if (isSolved == true || isEmpty() == true) {
@@ -44,6 +44,9 @@ abstract class MazeSolver {
             }
         }
 
+        if (now.getPrevious() != null) {
+            now.setPrevious(now);
+        }
         now.setStatus(Square.EXPLORED);
     }
 
@@ -51,7 +54,17 @@ abstract class MazeSolver {
         if (isEmpty()) {
             return "Maze is unsolvable.";
         } else if (isSolved()) {
-            return "Maze is solved.";
+            Square curr = this.maze.getEnd();
+            String path = "[" + curr.getRow() + ", " + curr.getCol() + "]";
+            curr.setStatus(Square.ON_EXIT_PATH);
+
+            while (curr.getPrevious() != null) {
+                curr = curr.getPrevious();
+                path += ", [" + curr.getRow() + ", " + curr.getCol() + "]";
+                System.out.println(path);
+                curr.setStatus(Square.ON_EXIT_PATH);
+            }
+            return path;
         } else {
             return "Maze not yet solved.";
         }

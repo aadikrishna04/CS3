@@ -16,11 +16,14 @@ public class Square {
     private int type;
     private char status;
 
+    private Square previous;
+
     public Square(int row, int col, int type) {
         this.row = row;
         this.col = col;
         this.type = type;
         status = UNKNOWN;
+        previous = null;
     }
 
     public int getRow() {
@@ -42,6 +45,7 @@ public class Square {
     public void reset() {
         if (type == EMPTY && (status == WORKING || status == EXPLORED))
             status = UNKNOWN;
+            previous = null;
     }
 
     @Override
@@ -68,5 +72,13 @@ public class Square {
 
     public void setStatus(char status) {
         this.status = status;
+    }
+
+    public Square getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(Square now) {
+        previous = now;
     }
 }
